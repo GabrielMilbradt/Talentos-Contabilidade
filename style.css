@@ -59,8 +59,7 @@ section {
 }
 
 .hero h1 {
-    /* Ajuste fino no clamp: Min 2.5rem, Max 3.5rem (em vez de 5vw) */
-    font-size: clamp(2.5rem, 5vw, 3.5rem); /* Título responsivo */
+    font-size: clamp(2.5rem, 5vw, 3.5rem); 
     margin-bottom: 1.25rem;
     color: var(--primary);
     font-weight: 700;
@@ -68,8 +67,7 @@ section {
 }
 
 .hero p {
-    /* Ajuste fino no clamp: Min 1rem, Max 1.3rem (em vez de 2.5vw) */
-    font-size: clamp(1rem, 2vw, 1.3rem); /* Parágrafo responsivo */
+    font-size: clamp(1rem, 2vw, 1.3rem); 
     margin-bottom: 2rem;
     color: var(--light);
 }
@@ -103,7 +101,7 @@ nav {
     z-index: 1000;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    /* Define uma altura mínima para o desktop e tablets maiores */
+    /* Define altura base no desktop */
     height: 4rem; /* 64px */
 }
 
@@ -111,10 +109,12 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: center; 
+    /* CRÍTICO: Usa space-between para isolar o toggle à direita no mobile */
+    justify-content: space-between; 
     align-items: center;
-    padding: 0 1.25rem; /* Ajuste o padding vertical */
-    height: 100%; /* Ocupa a altura total do nav */
+    /* Remove padding vertical, pois a altura é definida pelo nav */
+    padding: 0 1.25rem; 
+    height: 100%;
 }
 
 .nav-logo {
@@ -128,6 +128,7 @@ nav {
 .nav-menu {
     display: flex;
     gap: 2rem;
+    /* No desktop, ocupa espaço e centraliza */
     flex-grow: 1; 
     justify-content: center; 
 }
@@ -139,8 +140,7 @@ nav {
     font-size: 1rem;
     transition: color 0.3s ease;
     position: relative;
-    /* Adicionado padding para melhor área de clique no desktop */
-    padding: 0.5rem 0; 
+    padding: 0.5rem 0; /* Adiciona padding vertical para melhor área de clique */
 }
 
 .nav-link:hover {
@@ -152,7 +152,7 @@ nav {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: 0px; /* Ajustado para 0 */
+    bottom: 0px; 
     left: 0;
     background-color: var(--primary);
     transition: width 0.3s ease;
@@ -167,13 +167,15 @@ nav {
 }
 
 .nav-toggle {
-    display: none; 
+    display: none;
     flex-direction: column;
     cursor: pointer;
     width: 25px;
     height: 20px;
     justify-content: space-between;
     z-index: 1001; 
+    /* Remove position: absolute e usa flex-shrink para garantir que ele caiba */
+    flex-shrink: 0; 
 }
 
 .nav-toggle span {
@@ -459,7 +461,7 @@ footer {
         order: -1;
     }
     
-    /* Para tablets, o menu pode ficar alinhado à direita para visualizações paisagem */
+    /* Na versão Tablet, o menu pode ficar alinhado à direita */
     .nav-container {
         justify-content: flex-end; 
     }
@@ -474,53 +476,56 @@ footer {
 /* Tablets pequenos e celulares grandes (até 768px) */
 @media (max-width: 768px) {
     html {
-        font-size: 15px; /* Ajuste para base 15px para telas menores */
+        font-size: 15px;
     }
     
     section {
         padding: 3rem 0;
     }
 
-    /* AJUSTE: Altura da nav-bar em mobile */
+    /* AJUSTE CRÍTICO 1: Define a altura da nav-bar */
     nav {
-        height: 3.5rem; /* 56px */
+        height: 3.8rem; /* 60.8px */
     }
     
-    /* AJUSTE: Centraliza o nav-toggle à direita no mobile, empurrando o nav-menu */
     .nav-container {
-        justify-content: flex-end; /* Garante que o toggle fique à direita se o logo estiver escondido */
-        padding: 0 1.25rem;
+        justify-content: space-between; /* Garante que o toggle fique à direita */
     }
     
+    /* Menu Toggle visível */
     .nav-toggle {
         display: flex;
         position: static; 
         right: auto;
     }
     
-    /* AJUSTE CRUCIAL: Menu dropdown em mobile */
+    /* AJUSTE CRÍTICO 2: Menu dropdown em mobile */
     .nav-menu {
         position: fixed;
-        /* Usa a altura exata do nav (3.5rem ou 56px) */
-        top: 3.5rem; 
+        /* Usa a altura exata da nav */
+        top: 3.8rem; 
         right: -100%;
         flex-direction: column;
         background-color: var(--dark);
-        width: 80%;
-        max-width: 300px;
+        /* Usa 100% da largura da tela para melhor UX */
+        width: 100%;
+        max-width: none;
         text-align: center;
         transition: right 0.3s ease;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        padding: 1rem 0; /* Padding vertical no menu dropdown */
-        border-radius: 0 0 0 10px;
+        padding: 1rem 0; 
+        border-radius: 0;
         gap: 0;
-        /* Ajusta a altura para que o menu preencha o restante da tela */
-        height: calc(100vh - 3.5rem); 
-        overflow-y: auto; /* Permite rolagem se houver muitos links */
+        /* CRÍTICO: Preenche o restante da tela */
+        height: calc(100vh - 3.8rem); 
+        overflow-y: auto; 
+        z-index: 999;
+        /* Remove o flex-grow para mobile */
+        flex-grow: 0; 
     }
     
     .nav-menu.active {
-        right: 0; /* Menu visível */
+        right: 0;
     }
     
     .nav-link {
@@ -528,13 +533,11 @@ footer {
         padding: 0.8rem 0;
         width: 100%;
         font-size: 1.1rem;
+        /* Remove o sublinhado em mobile para não interferir no espaçamento */
+        &::after { display: none; }
     }
     
-    .nav-link::after {
-        display: none;
-    }
-    
-    /* Animação do menu hamburguer */
+    /* Animação do menu hamburguer (mantida) */
     .nav-toggle.active span:nth-child(1) {
         transform: rotate(-45deg) translate(-5px, 6px);
     }
@@ -590,15 +593,15 @@ footer {
 /* Celulares pequenos (até 576px) */
 @media (max-width: 576px) {
     html {
-        font-size: 14px; /* Ajuste base para celulares menores */
+        font-size: 14px; 
     }
     
-    /* AJUSTE: Altura da nav-bar em celulares pequenos */
+    /* AJUSTE CRÍTICO 3: Altura menor para nav em celulares pequenos */
     nav {
         height: 3rem; /* 48px */
     }
 
-    /* AJUSTE: Recalculando a posição do menu móvel com a nova altura */
+    /* AJUSTE CRÍTICO 4: Recalculando a posição do menu móvel com a nova altura */
     .nav-menu {
         top: 3rem; 
         height: calc(100vh - 3rem); 
@@ -656,7 +659,6 @@ footer {
         height: 1.4rem;
     }
 
-    /* Reduzindo o padding do container para dispositivos muito pequenos */
     .container {
         padding: 0 0.8rem;
     }
