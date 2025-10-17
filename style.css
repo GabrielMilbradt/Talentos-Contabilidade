@@ -103,16 +103,18 @@ nav {
     z-index: 1000;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    /* Define uma altura mínima para o desktop e tablets maiores */
+    height: 4rem; /* 64px */
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    /* AJUSTE: Centraliza o menu horizontalmente na versão desktop */
     justify-content: center; 
     align-items: center;
-    padding: 1rem 1.25rem;
+    padding: 0 1.25rem; /* Ajuste o padding vertical */
+    height: 100%; /* Ocupa a altura total do nav */
 }
 
 .nav-logo {
@@ -120,16 +122,14 @@ nav {
     font-weight: 700;
     font-size: 1.5rem;
     text-decoration: none;
-    /* Oculto, mas mantido caso queira reintroduzir */
     display: none; 
 }
 
 .nav-menu {
     display: flex;
     gap: 2rem;
-    /* AJUSTE: Permite que o menu ocupe todo o espaço disponível, forçando a centralização */
     flex-grow: 1; 
-    justify-content: center; /* Centraliza os links dentro do nav-menu */
+    justify-content: center; 
 }
 
 .nav-link {
@@ -139,6 +139,8 @@ nav {
     font-size: 1rem;
     transition: color 0.3s ease;
     position: relative;
+    /* Adicionado padding para melhor área de clique no desktop */
+    padding: 0.5rem 0; 
 }
 
 .nav-link:hover {
@@ -150,7 +152,7 @@ nav {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -5px;
+    bottom: 0px; /* Ajustado para 0 */
     left: 0;
     background-color: var(--primary);
     transition: width 0.3s ease;
@@ -165,13 +167,13 @@ nav {
 }
 
 .nav-toggle {
-    display: none; /* Escondido por padrão no desktop */
+    display: none; 
     flex-direction: column;
     cursor: pointer;
     width: 25px;
     height: 20px;
     justify-content: space-between;
-    z-index: 1001; /* Para garantir que fique acima do nav-menu */
+    z-index: 1001; 
 }
 
 .nav-toggle span {
@@ -457,7 +459,7 @@ footer {
         order: -1;
     }
     
-    /* Na versão Tablet, mantemos o menu na horizontal, mas agora alinhado à direita para liberar espaço */
+    /* Para tablets, o menu pode ficar alinhado à direita para visualizações paisagem */
     .nav-container {
         justify-content: flex-end; 
     }
@@ -478,29 +480,29 @@ footer {
     section {
         padding: 3rem 0;
     }
-    
-    /* AJUSTE: Garante que o contêiner de navegação separe o toggle do menu */
-    .nav-container {
-        justify-content: space-between; /* Ajustado para ter o logo e o toggle nas pontas (se o logo estivesse visível) */
-        padding: 0.8rem 1.25rem; /* Ajuste para diminuir a altura da nav-bar */
-    }
-    
-    .nav-logo {
-        /* Se o logo estivesse visível, estaria aqui */
-        display: none; 
-    }
 
-    /* Agora o Toggle é visível e não usa posição absoluta */
+    /* AJUSTE: Altura da nav-bar em mobile */
+    nav {
+        height: 3.5rem; /* 56px */
+    }
+    
+    /* AJUSTE: Centraliza o nav-toggle à direita no mobile, empurrando o nav-menu */
+    .nav-container {
+        justify-content: flex-end; /* Garante que o toggle fique à direita se o logo estiver escondido */
+        padding: 0 1.25rem;
+    }
+    
     .nav-toggle {
         display: flex;
         position: static; 
         right: auto;
     }
     
-    /* Ajuste para menu dropdown em mobile */
+    /* AJUSTE CRUCIAL: Menu dropdown em mobile */
     .nav-menu {
         position: fixed;
-        top: 65px; /* Altura da navbar na tela (aprox. 65px) */
+        /* Usa a altura exata do nav (3.5rem ou 56px) */
+        top: 3.5rem; 
         right: -100%;
         flex-direction: column;
         background-color: var(--dark);
@@ -509,10 +511,12 @@ footer {
         text-align: center;
         transition: right 0.3s ease;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        padding: 2rem 0;
+        padding: 1rem 0; /* Padding vertical no menu dropdown */
         border-radius: 0 0 0 10px;
         gap: 0;
-        height: 100vh; /* Ocupa a altura total da tela para o menu */
+        /* Ajusta a altura para que o menu preencha o restante da tela */
+        height: calc(100vh - 3.5rem); 
+        overflow-y: auto; /* Permite rolagem se houver muitos links */
     }
     
     .nav-menu.active {
@@ -521,12 +525,11 @@ footer {
     
     .nav-link {
         display: block;
-        padding: 1rem 0;
+        padding: 0.8rem 0;
         width: 100%;
         font-size: 1.1rem;
     }
     
-    /* Oculta o sublinhado em mobile para não interferir no espaçamento */
     .nav-link::after {
         display: none;
     }
@@ -590,13 +593,19 @@ footer {
         font-size: 14px; /* Ajuste base para celulares menores */
     }
     
-    .nav-container {
-        padding: 0.6rem 1rem; /* Diminui ainda mais a altura da nav-bar (aprox 40px) */
+    /* AJUSTE: Altura da nav-bar em celulares pequenos */
+    nav {
+        height: 3rem; /* 48px */
     }
 
-    /* Recalculando a posição do menu móvel com a nova altura da nav-container (aprox 40px) */
+    /* AJUSTE: Recalculando a posição do menu móvel com a nova altura */
     .nav-menu {
-        top: 40px; 
+        top: 3rem; 
+        height: calc(100vh - 3rem); 
+    }
+    
+    .nav-container {
+        padding: 0 1rem;
     }
     
     .hero-content {
