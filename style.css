@@ -1,4 +1,3 @@
-/* Reset e configurações básicas */
 * {
     margin: 0;
     padding: 0;
@@ -17,6 +16,7 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px; /* Base para rem units (Desktop) */
 }
 
 body {
@@ -35,7 +35,7 @@ body {
 
 /* Seções */
 section {
-    padding: 80px 0;
+    padding: 5rem 0; /* Usando rem para escalabilidade */
 }
 
 /* Cabeçalho/Hero */
@@ -59,16 +59,18 @@ section {
 }
 
 .hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
+    /* Ajuste fino no clamp: Min 2.5rem, Max 3.5rem (em vez de 5vw) */
+    font-size: clamp(2.5rem, 5vw, 3.5rem); /* Título responsivo */
+    margin-bottom: 1.25rem;
     color: var(--primary);
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
-    font-size: 1.3rem;
-    margin-bottom: 30px;
+    /* Ajuste fino no clamp: Min 1rem, Max 1.3rem (em vez de 2.5vw) */
+    font-size: clamp(1rem, 2vw, 1.3rem); /* Parágrafo responsivo */
+    margin-bottom: 2rem;
     color: var(--light);
 }
 
@@ -76,11 +78,11 @@ section {
     display: inline-block;
     background-color: var(--primary);
     color: var(--dark);
-    padding: 12px 30px;
-    border-radius: 30px;
+    padding: 0.75rem 1.875rem;
+    border-radius: 1.875rem;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     transition: all 0.3s ease;
     border: 2px solid var(--primary);
 }
@@ -92,51 +94,83 @@ section {
     box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
 
-/* Navbar */
+/* Navbar responsiva */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
     background: rgba(18, 18, 18, 0.95);
-    display: flex;
-    justify-content: center;
-    padding: 25px 0; /* AUMENTA A ALTURA DA BARRA DE NAVEGAÇÃO (de 20px para 25px) */
     z-index: 1000;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-nav a {
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    /* AJUSTE: Centraliza o menu horizontalmente */
+    justify-content: center; 
+    align-items: center;
+    padding: 1rem 1.25rem;
+}
+
+.nav-logo {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-decoration: none;
+    /* Oculto, mas mantido caso queira reintroduzir */
+    display: none; 
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    /* AJUSTE: Permite que o menu ocupe todo o espaço disponível, forçando a centralização */
+    flex-grow: 1; 
+    justify-content: center; /* Centraliza os links dentro do nav-menu */
+}
+
+.nav-link {
     color: var(--light);
     text-decoration: none;
-    margin: 0 40px; /* Aumenta a distância entre os links  */
-    font-weight: 700; /* FONTE MAIS BONITA/CHAMATIVA  */
-    font-size: 1.7rem; /* FONTE MAIOR/CHAMATIVA  */
+    font-weight: 600;
+    font-size: 1rem;
     transition: color 0.3s ease;
     position: relative;
 }
 
-nav a:hover {
+.nav-link:hover {
     color: var(--primary);
 }
 
-nav a::after {
+.nav-link::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 3px; /* Aumenta a espessura do sublinhado  */
-    bottom: -8px; /* Ajusta a posição do sublinhado */
+    height: 2px;
+    bottom: -5px;
     left: 0;
     background-color: var(--primary);
     transition: width 0.3s ease;
 }
 
-nav a:hover::after {
+.nav-link:hover::after {
     width: 100%;
 }
 
-nav a.active {
+.nav-link.active {
     color: var(--primary);
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    /* Adicionado position: absolute para não interferir na centralização, mas mantê-lo visível na direita para desktop, caso queira um botão */
+    position: absolute; 
+    right: 1.25rem; 
 }
 
 /* Seção Serviços */
@@ -146,40 +180,40 @@ nav a.active {
 
 .section-title {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 3.75rem;
     color: var(--primary);
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     position: relative;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    width: 80px;
+    width: 5rem;
     height: 3px;
     background-color: var(--primary);
-    bottom: -15px;
+    bottom: -0.9375rem;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 1.875rem;
 }
 
 .service-card {
     background-color: rgba(255, 255, 255, 0.05);
-    padding: 40px 30px;
-    border-radius: 10px;
+    padding: 2.5rem 1.875rem;
+    border-radius: 0.625rem;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-0.625rem);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     border-color: rgba(212, 175, 55, 0.3);
 }
@@ -187,12 +221,12 @@ nav a.active {
 .service-icon {
     font-size: 3rem;
     color: var(--primary);
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .service-card h3 {
     color: var(--primary);
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
     font-size: 1.5rem;
 }
 
@@ -208,28 +242,28 @@ nav a.active {
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    gap: 3.125rem;
     align-items: center;
 }
 
 .about-text h2 {
     color: var(--primary);
-    margin-bottom: 20px;
-    font-size: 2.2rem;
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.8rem, 3.5vw, 2.2rem);
 }
 
 .about-text p {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     color: var(--light);
 }
 
 .about-features {
     list-style: none;
-    margin-top: 30px;
+    margin-top: 1.875rem;
 }
 
 .about-features li {
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
     display: flex;
     align-items: center;
 }
@@ -238,12 +272,12 @@ nav a.active {
     content: '✓';
     color: var(--primary);
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 0.625rem;
     font-size: 1.2rem;
 }
 
 .about-image {
-    border-radius: 10px;
+    border-radius: 0.625rem;
     overflow: hidden;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
@@ -261,61 +295,60 @@ nav a.active {
 
 /* Seção Contato */
 #contato {
-    /* Fundo preto/escuro */
-    background: var(--secondary); 
-    padding: 80px 0;
+    background: var(--secondary);
+    padding: 5rem 0;
 }
 
 .contact-title {
-    color: var(--primary); /* Título  */
-    font-size: 2.5rem;
+    color: var(--primary);
+    font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 600;
     text-align: left;
-    margin-bottom: 15px;
-    padding-left: 20px;
+    margin-bottom: 0.9375rem;
+    padding-left: 1.25rem;
 }
 
 .contact-divider {
-    width: 60px;
+    width: 3.75rem;
     height: 3px;
-    background-color: var(--primary); /* Divisor  */
-    margin-left: 20px;
-    margin-bottom: 50px;
+    background-color: var(--primary);
+    margin-left: 1.25rem;
+    margin-bottom: 3.125rem;
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
     gap: 0;
-    max-width: 600px;
+    max-width: 37.5rem;
     margin: 0 auto;
 }
 
 .contact-item {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
-    padding: 25px 20px;
+    gap: 1.25rem;
+    padding: 1.5625rem 1.25rem;
     transition: all 0.3s ease;
 }
 
 .contact-item:hover {
-    background-color: rgba(212, 175, 55, 0.05); /* Efeito hover */
+    background-color: rgba(212, 175, 55, 0.05);
 }
 
 .contact-icon-wrapper {
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .contact-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--primary); /* Ícones */
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--primary);
 }
 
 .contact-text {
@@ -325,34 +358,34 @@ nav a.active {
 }
 
 .contact-link {
-    color: var(--light); /* Cor do link */
+    color: var(--light);
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     line-height: 1.6;
     transition: color 0.3s ease;
 }
 
 .contact-link:hover {
-    color: var(--primary); /* Hover  */
+    color: var(--primary);
 }
 
 /* Botões fixos */
 .fixed-buttons {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 1.875rem;
+    right: 1.875rem;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 0.9375rem;
     z-index: 1000;
 }
 
-.fixed-buttons a {
+.fixed-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
+    width: 3.75rem;
+    height: 3.75rem;
     background: var(--primary);
     border-radius: 50%;
     text-decoration: none;
@@ -360,27 +393,27 @@ nav a.active {
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
 }
 
-.fixed-buttons a:hover {
+.fixed-button:hover {
     background: var(--light);
     transform: scale(1.1);
     box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
 }
 
-.fixed-buttons img {
-    width: 30px;
-    height: 30px;
+.fixed-button img {
+    width: 1.875rem;
+    height: 1.875rem;
 }
 
 /* Footer */
 footer {
     background-color: var(--dark);
-    padding: 40px 0;
+    padding: 2.5rem 0;
     text-align: center;
     border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .footer-content {
-    max-width: 600px;
+    max-width: 37.5rem;
     margin: 0 auto;
 }
 
@@ -388,12 +421,12 @@ footer {
     color: var(--primary);
     font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .footer-text {
     color: var(--gray);
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .copyright {
@@ -401,67 +434,122 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Responsividade */
+/* ========== RESPONSIVIDADE ========== */
+
+/* Tablets e telas menores (até 992px) */
 @media (max-width: 992px) {
     .about-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 2.5rem;
     }
     
     .about-image {
         order: -1;
     }
     
-    .hero h1 {
-        font-size: 2.8rem;
+    .nav-menu {
+        gap: 1.5rem;
     }
     
-    nav a {
-        margin: 0 15px;
-        font-size: 1.2rem; /* Ajuste para responsividade */
+    /* AJUSTE: Mantém o menu alinhado à direita para mobile/tablet (para dispositivos maiores que 768px mas menores que 992px) */
+    .nav-container {
+        justify-content: flex-end; 
+    }
+    
+    .nav-menu {
+        justify-content: flex-end; 
+        flex-grow: 0;
     }
 }
 
+/* Tablets pequenos e celulares grandes (até 768px) */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.2rem;
+    html {
+        font-size: 15px; /* Ajuste para base 15px para telas menores */
     }
     
-    .hero p {
+    section {
+        padding: 3rem 0;
+    }
+    
+    /* AJUSTE: Garante que o contêiner de navegação separe o menu toggle do menu */
+    .nav-container {
+        justify-content: flex-end; /* Empurra o toggle para a direita */
+    }
+    
+    /* Retira a posição absoluta no toggle em mobile para que ocupe espaço no nav-container */
+    .nav-toggle {
+        display: flex;
+        position: static; 
+        right: auto;
+    }
+    
+    /* Ajuste para menu dropdown em mobile */
+    .nav-menu {
+        position: fixed;
+        top: 65px; 
+        right: -100%;
+        flex-direction: column;
+        background-color: var(--dark);
+        width: 80%;
+        max-width: 300px;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        padding: 2rem 0;
+        border-radius: 0 0 0 10px;
+        gap: 0;
+        justify-content: center; 
+        flex-grow: 0; 
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 1rem 0;
+        width: 100%;
         font-size: 1.1rem;
     }
     
-    nav {
-        flex-wrap: wrap;
-        padding: 15px 0;
+    
+    /* Animação do menu hamburguer */
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
     }
     
-    nav a {
-        margin: 5px 10px;
-        font-size: 1.1rem; /* Ajuste para responsividade */
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
     }
     
-    .section-title {
-        font-size: 2rem;
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     .service-card {
-        padding: 30px 20px;
+        padding: 2rem 1.5rem;
     }
     
     .fixed-buttons {
-        bottom: 20px;
-        right: 20px;
+        bottom: 1.25rem;
+        right: 1.25rem;
     }
     
-    .fixed-buttons a {
-        width: 50px;
-        height: 50px;
+    .fixed-button {
+        width: 3.125rem;
+        height: 3.125rem;
     }
     
-    .fixed-buttons img {
-        width: 25px;
-        height: 25px;
+    .fixed-button img {
+        width: 1.5625rem;
+        height: 1.5625rem;
     }
     
     .contact-title {
@@ -474,23 +562,77 @@ footer {
         margin-left: auto;
         margin-right: auto;
     }
+    
+    .contact-item {
+        padding: 1.25rem 1rem;
+    }
 }
 
+/* Celulares pequenos (até 576px) */
 @media (max-width: 576px) {
-    .hero h1 {
-        font-size: 1.8rem;
+    html {
+        font-size: 14px; /* Ajuste base para celulares menores */
     }
     
-    .services-grid {
-        grid-template-columns: 1fr;
+    .nav-container {
+        padding: 0.8rem 1rem;
+    }
+
+    /* Recalculando a posição do menu móvel com a nova altura da nav-container (aprox 40px) */
+    .nav-menu {
+        top: 40px; 
+    }
+    
+    .hero-content {
+        padding: 0 1rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .about-features li {
+        font-size: 0.9rem;
     }
     
     .contact-item {
         flex-direction: row;
         text-align: left;
+        gap: 1rem;
     }
     
     .contact-link {
         font-size: 1rem;
+    }
+    
+    .footer-logo {
+        font-size: 1.5rem;
+    }
+}
+
+/* Dispositivos muito pequenos (até 400px) */
+@media (max-width: 400px) {
+    .service-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .fixed-buttons {
+        bottom: 1rem;
+        right: 1rem;
+    }
+    
+    .fixed-button {
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+    
+    .fixed-button img {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+
+    /* Reduzindo o padding do container para dispositivos muito pequenos */
+    .container {
+        padding: 0 0.8rem;
     }
 }
