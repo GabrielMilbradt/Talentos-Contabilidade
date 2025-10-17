@@ -109,7 +109,7 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    /* AJUSTE: Centraliza o menu horizontalmente */
+    /* AJUSTE: Centraliza o menu horizontalmente na versão desktop */
     justify-content: center; 
     align-items: center;
     padding: 1rem 1.25rem;
@@ -165,12 +165,22 @@ nav {
 }
 
 .nav-toggle {
-    display: none;
+    display: none; /* Escondido por padrão no desktop */
     flex-direction: column;
     cursor: pointer;
-    /* Adicionado position: absolute para não interferir na centralização, mas mantê-lo visível na direita para desktop, caso queira um botão */
-    position: absolute; 
-    right: 1.25rem; 
+    width: 25px;
+    height: 20px;
+    justify-content: space-between;
+    z-index: 1001; /* Para garantir que fique acima do nav-menu */
+}
+
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 3px;
+    transition: all 0.3s linear;
 }
 
 /* Seção Serviços */
@@ -447,11 +457,7 @@ footer {
         order: -1;
     }
     
-    .nav-menu {
-        gap: 1.5rem;
-    }
-    
-    /* AJUSTE: Mantém o menu alinhado à direita para mobile/tablet (para dispositivos maiores que 768px mas menores que 992px) */
+    /* Na versão Tablet, mantemos o menu na horizontal, mas agora alinhado à direita para liberar espaço */
     .nav-container {
         justify-content: flex-end; 
     }
@@ -459,6 +465,7 @@ footer {
     .nav-menu {
         justify-content: flex-end; 
         flex-grow: 0;
+        gap: 1.5rem;
     }
 }
 
@@ -472,12 +479,18 @@ footer {
         padding: 3rem 0;
     }
     
-    /* AJUSTE: Garante que o contêiner de navegação separe o menu toggle do menu */
+    /* AJUSTE: Garante que o contêiner de navegação separe o toggle do menu */
     .nav-container {
-        justify-content: flex-end; /* Empurra o toggle para a direita */
+        justify-content: space-between; /* Ajustado para ter o logo e o toggle nas pontas (se o logo estivesse visível) */
+        padding: 0.8rem 1.25rem; /* Ajuste para diminuir a altura da nav-bar */
     }
     
-    /* Retira a posição absoluta no toggle em mobile para que ocupe espaço no nav-container */
+    .nav-logo {
+        /* Se o logo estivesse visível, estaria aqui */
+        display: none; 
+    }
+
+    /* Agora o Toggle é visível e não usa posição absoluta */
     .nav-toggle {
         display: flex;
         position: static; 
@@ -487,24 +500,23 @@ footer {
     /* Ajuste para menu dropdown em mobile */
     .nav-menu {
         position: fixed;
-        top: 65px; 
+        top: 65px; /* Altura da navbar na tela (aprox. 65px) */
         right: -100%;
         flex-direction: column;
         background-color: var(--dark);
         width: 80%;
         max-width: 300px;
         text-align: center;
-        transition: 0.3s;
+        transition: right 0.3s ease;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
         padding: 2rem 0;
         border-radius: 0 0 0 10px;
         gap: 0;
-        justify-content: center; 
-        flex-grow: 0; 
+        height: 100vh; /* Ocupa a altura total da tela para o menu */
     }
     
     .nav-menu.active {
-        right: 0;
+        right: 0; /* Menu visível */
     }
     
     .nav-link {
@@ -514,6 +526,10 @@ footer {
         font-size: 1.1rem;
     }
     
+    /* Oculta o sublinhado em mobile para não interferir no espaçamento */
+    .nav-link::after {
+        display: none;
+    }
     
     /* Animação do menu hamburguer */
     .nav-toggle.active span:nth-child(1) {
@@ -575,7 +591,7 @@ footer {
     }
     
     .nav-container {
-        padding: 0.8rem 1rem;
+        padding: 0.6rem 1rem; /* Diminui ainda mais a altura da nav-bar (aprox 40px) */
     }
 
     /* Recalculando a posição do menu móvel com a nova altura da nav-container (aprox 40px) */
