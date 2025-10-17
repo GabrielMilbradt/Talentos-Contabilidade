@@ -1,3 +1,4 @@
+/* Reset e configurações básicas */
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +17,6 @@
 
 html {
     scroll-behavior: smooth;
-    font-size: 16px; /* Base para rem units (Desktop) */
 }
 
 body {
@@ -35,7 +35,7 @@ body {
 
 /* Seções */
 section {
-    padding: 5rem 0; /* Usando rem para escalabilidade */
+    padding: 80px 0;
 }
 
 /* Cabeçalho/Hero */
@@ -59,16 +59,16 @@ section {
 }
 
 .hero h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem); 
-    margin-bottom: 1.25rem;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
     color: var(--primary);
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
-    font-size: clamp(1rem, 2vw, 1.3rem); 
-    margin-bottom: 2rem;
+    font-size: 1.3rem;
+    margin-bottom: 30px;
     color: var(--light);
 }
 
@@ -76,11 +76,11 @@ section {
     display: inline-block;
     background-color: var(--primary);
     color: var(--dark);
-    padding: 0.75rem 1.875rem;
-    border-radius: 1.875rem;
+    padding: 12px 30px;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-size: 1.1rem;
     transition: all 0.3s ease;
     border: 2px solid var(--primary);
 }
@@ -92,99 +92,51 @@ section {
     box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
 
-/* Navbar responsiva */
+/* Navbar */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
     background: rgba(18, 18, 18, 0.95);
+    display: flex;
+    justify-content: center;
+    padding: 25px 0; /* AUMENTA A ALTURA DA BARRA DE NAVEGAÇÃO (de 20px para 25px) */
     z-index: 1000;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    /* Define altura base no desktop */
-    height: 4rem; /* 64px */
 }
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    /* CRÍTICO: Usa space-between para isolar o toggle à direita no mobile */
-    justify-content: space-between; 
-    align-items: center;
-    /* Remove padding vertical, pois a altura é definida pelo nav */
-    padding: 0 1.25rem; 
-    height: 100%;
-}
-
-.nav-logo {
-    color: var(--primary);
-    font-weight: 700;
-    font-size: 1.5rem;
-    text-decoration: none;
-    display: none; 
-}
-
-.nav-menu {
-    display: flex;
-    gap: 2rem;
-    /* No desktop, ocupa espaço e centraliza */
-    flex-grow: 1; 
-    justify-content: center; 
-}
-
-.nav-link {
+nav a {
     color: var(--light);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
+    margin: 0 40px; /* Aumenta a distância entre os links  */
+    font-weight: 700; /* FONTE MAIS BONITA/CHAMATIVA  */
+    font-size: 1.5rem; /* FONTE MAIOR/CHAMATIVA  */
     transition: color 0.3s ease;
     position: relative;
-    padding: 0.5rem 0; /* Adiciona padding vertical para melhor área de clique */
 }
 
-.nav-link:hover {
+nav a:hover {
     color: var(--primary);
 }
 
-.nav-link::after {
+nav a::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 2px;
-    bottom: 0px; 
+    height: 3px; /* Aumenta a espessura do sublinhado  */
+    bottom: -8px; /* Ajusta a posição do sublinhado */
     left: 0;
     background-color: var(--primary);
     transition: width 0.3s ease;
 }
 
-.nav-link:hover::after {
+nav a:hover::after {
     width: 100%;
 }
 
-.nav-link.active {
+nav a.active {
     color: var(--primary);
-}
-
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    width: 25px;
-    height: 20px;
-    justify-content: space-between;
-    z-index: 1001; 
-    /* Remove position: absolute e usa flex-shrink para garantir que ele caiba */
-    flex-shrink: 0; 
-}
-
-.nav-toggle span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--primary);
-    border-radius: 3px;
-    transition: all 0.3s linear;
 }
 
 /* Seção Serviços */
@@ -194,40 +146,40 @@ nav {
 
 .section-title {
     text-align: center;
-    margin-bottom: 3.75rem;
+    margin-bottom: 60px;
     color: var(--primary);
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-size: 2.5rem;
     position: relative;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    width: 5rem;
+    width: 80px;
     height: 3px;
     background-color: var(--primary);
-    bottom: -0.9375rem;
+    bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-    gap: 1.875rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
 .service-card {
     background-color: rgba(255, 255, 255, 0.05);
-    padding: 2.5rem 1.875rem;
-    border-radius: 0.625rem;
+    padding: 40px 30px;
+    border-radius: 10px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .service-card:hover {
-    transform: translateY(-0.625rem);
+    transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     border-color: rgba(212, 175, 55, 0.3);
 }
@@ -235,12 +187,12 @@ nav {
 .service-icon {
     font-size: 3rem;
     color: var(--primary);
-    margin-bottom: 1.25rem;
+    margin-bottom: 20px;
 }
 
 .service-card h3 {
     color: var(--primary);
-    margin-bottom: 0.9375rem;
+    margin-bottom: 15px;
     font-size: 1.5rem;
 }
 
@@ -256,28 +208,28 @@ nav {
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3.125rem;
+    gap: 50px;
     align-items: center;
 }
 
 .about-text h2 {
     color: var(--primary);
-    margin-bottom: 1.25rem;
-    font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+    margin-bottom: 20px;
+    font-size: 2.2rem;
 }
 
 .about-text p {
-    margin-bottom: 1.25rem;
+    margin-bottom: 20px;
     color: var(--light);
 }
 
 .about-features {
     list-style: none;
-    margin-top: 1.875rem;
+    margin-top: 30px;
 }
 
 .about-features li {
-    margin-bottom: 0.9375rem;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
 }
@@ -286,12 +238,12 @@ nav {
     content: '✓';
     color: var(--primary);
     font-weight: bold;
-    margin-right: 0.625rem;
+    margin-right: 10px;
     font-size: 1.2rem;
 }
 
 .about-image {
-    border-radius: 0.625rem;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
@@ -309,60 +261,61 @@ nav {
 
 /* Seção Contato */
 #contato {
-    background: var(--secondary);
-    padding: 5rem 0;
+    /* Fundo preto/escuro */
+    background: var(--secondary); 
+    padding: 80px 0;
 }
 
 .contact-title {
-    color: var(--primary);
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    color: var(--primary); /* Título  */
+    font-size: 2.5rem;
     font-weight: 600;
     text-align: left;
-    margin-bottom: 0.9375rem;
-    padding-left: 1.25rem;
+    margin-bottom: 15px;
+    padding-left: 20px;
 }
 
 .contact-divider {
-    width: 3.75rem;
+    width: 60px;
     height: 3px;
-    background-color: var(--primary);
-    margin-left: 1.25rem;
-    margin-bottom: 3.125rem;
+    background-color: var(--primary); /* Divisor  */
+    margin-left: 20px;
+    margin-bottom: 50px;
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
     gap: 0;
-    max-width: 37.5rem;
+    max-width: 600px;
     margin: 0 auto;
 }
 
 .contact-item {
     display: flex;
     align-items: flex-start;
-    gap: 1.25rem;
-    padding: 1.5625rem 1.25rem;
+    gap: 20px;
+    padding: 25px 20px;
     transition: all 0.3s ease;
 }
 
 .contact-item:hover {
-    background-color: rgba(212, 175, 55, 0.05);
+    background-color: rgba(212, 175, 55, 0.05); /* Efeito hover */
 }
 
 .contact-icon-wrapper {
     flex-shrink: 0;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .contact-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    color: var(--primary);
+    width: 24px;
+    height: 24px;
+    color: var(--primary); /* Ícones */
 }
 
 .contact-text {
@@ -372,34 +325,34 @@ nav {
 }
 
 .contact-link {
-    color: var(--light);
+    color: var(--light); /* Cor do link */
     text-decoration: none;
-    font-size: clamp(1rem, 2vw, 1.1rem);
+    font-size: 1.1rem;
     line-height: 1.6;
     transition: color 0.3s ease;
 }
 
 .contact-link:hover {
-    color: var(--primary);
+    color: var(--primary); /* Hover  */
 }
 
 /* Botões fixos */
 .fixed-buttons {
     position: fixed;
-    bottom: 1.875rem;
-    right: 1.875rem;
+    bottom: 30px;
+    right: 30px;
     display: flex;
     flex-direction: column;
-    gap: 0.9375rem;
+    gap: 15px;
     z-index: 1000;
 }
 
-.fixed-button {
+.fixed-buttons a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3.75rem;
-    height: 3.75rem;
+    width: 60px;
+    height: 60px;
     background: var(--primary);
     border-radius: 50%;
     text-decoration: none;
@@ -407,27 +360,27 @@ nav {
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
 }
 
-.fixed-button:hover {
+.fixed-buttons a:hover {
     background: var(--light);
     transform: scale(1.1);
     box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
 }
 
-.fixed-button img {
-    width: 1.875rem;
-    height: 1.875rem;
+.fixed-buttons img {
+    width: 30px;
+    height: 30px;
 }
 
 /* Footer */
 footer {
     background-color: var(--dark);
-    padding: 2.5rem 0;
+    padding: 40px 0;
     text-align: center;
     border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .footer-content {
-    max-width: 37.5rem;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -435,12 +388,12 @@ footer {
     color: var(--primary);
     font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 1.25rem;
+    margin-bottom: 20px;
 }
 
 .footer-text {
     color: var(--gray);
-    margin-bottom: 1.25rem;
+    margin-bottom: 20px;
 }
 
 .copyright {
@@ -448,130 +401,67 @@ footer {
     font-size: 0.9rem;
 }
 
-/* ========== RESPONSIVIDADE ========== */
-
-/* Tablets e telas menores (até 992px) */
+/* Responsividade */
 @media (max-width: 992px) {
     .about-content {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 40px;
     }
     
     .about-image {
         order: -1;
     }
     
-    /* Na versão Tablet, o menu pode ficar alinhado à direita */
-    .nav-container {
-        justify-content: flex-end; 
+    .hero h1 {
+        font-size: 2.8rem;
     }
     
-    .nav-menu {
-        justify-content: flex-end; 
-        flex-grow: 0;
-        gap: 1.5rem;
+    nav a {
+        margin: 0 15px;
+        font-size: 1.2rem; /* Ajuste para responsividade */
     }
 }
 
-/* Tablets pequenos e celulares grandes (até 768px) */
 @media (max-width: 768px) {
-    html {
-        font-size: 15px;
+    .hero h1 {
+        font-size: 2.2rem;
     }
     
-    section {
-        padding: 3rem 0;
-    }
-
-    /* AJUSTE CRÍTICO 1: Define a altura da nav-bar */
-    nav {
-        height: 3.8rem; /* 60.8px */
-    }
-    
-    .nav-container {
-        justify-content: space-between; /* Garante que o toggle fique à direita */
-    }
-    
-    /* Menu Toggle visível */
-    .nav-toggle {
-        display: flex;
-        position: static; 
-        right: auto;
-    }
-    
-    /* AJUSTE CRÍTICO 2: Menu dropdown em mobile */
-    .nav-menu {
-        position: fixed;
-        /* Usa a altura exata da nav */
-        top: 3.8rem; 
-        right: -100%;
-        flex-direction: column;
-        background-color: var(--dark);
-        /* Usa 100% da largura da tela para melhor UX */
-        width: 100%;
-        max-width: none;
-        text-align: center;
-        transition: right 0.3s ease;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        padding: 1rem 0; 
-        border-radius: 0;
-        gap: 0;
-        /* CRÍTICO: Preenche o restante da tela */
-        height: calc(100vh - 3.8rem); 
-        overflow-y: auto; 
-        z-index: 999;
-        /* Remove o flex-grow para mobile */
-        flex-grow: 0; 
-    }
-    
-    .nav-menu.active {
-        right: 0;
-    }
-    
-    .nav-link {
-        display: block;
-        padding: 0.8rem 0;
-        width: 100%;
+    .hero p {
         font-size: 1.1rem;
-        /* Remove o sublinhado em mobile para não interferir no espaçamento */
-        &::after { display: none; }
     }
     
-    /* Animação do menu hamburguer (mantida) */
-    .nav-toggle.active span:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
+    nav {
+        flex-wrap: wrap;
+        padding: 15px 0;
     }
     
-    .nav-toggle.active span:nth-child(2) {
-        opacity: 0;
+    nav a {
+        margin: 5px 10px;
+        font-size: 1.1rem; /* Ajuste para responsividade */
     }
     
-    .nav-toggle.active span:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+    .section-title {
+        font-size: 2rem;
     }
     
     .service-card {
-        padding: 2rem 1.5rem;
+        padding: 30px 20px;
     }
     
     .fixed-buttons {
-        bottom: 1.25rem;
-        right: 1.25rem;
+        bottom: 20px;
+        right: 20px;
     }
     
-    .fixed-button {
-        width: 3.125rem;
-        height: 3.125rem;
+    .fixed-buttons a {
+        width: 50px;
+        height: 50px;
     }
     
-    .fixed-button img {
-        width: 1.5625rem;
-        height: 1.5625rem;
+    .fixed-buttons img {
+        width: 25px;
+        height: 25px;
     }
     
     .contact-title {
@@ -584,82 +474,23 @@ footer {
         margin-left: auto;
         margin-right: auto;
     }
-    
-    .contact-item {
-        padding: 1.25rem 1rem;
-    }
 }
 
-/* Celulares pequenos (até 576px) */
 @media (max-width: 576px) {
-    html {
-        font-size: 14px; 
+    .hero h1 {
+        font-size: 1.8rem;
     }
     
-    /* AJUSTE CRÍTICO 3: Altura menor para nav em celulares pequenos */
-    nav {
-        height: 3rem; /* 48px */
-    }
-
-    /* AJUSTE CRÍTICO 4: Recalculando a posição do menu móvel com a nova altura */
-    .nav-menu {
-        top: 3rem; 
-        height: calc(100vh - 3rem); 
-    }
-    
-    .nav-container {
-        padding: 0 1rem;
-    }
-    
-    .hero-content {
-        padding: 0 1rem;
-    }
-    
-    .container {
-        padding: 0 1rem;
-    }
-    
-    .about-features li {
-        font-size: 0.9rem;
+    .services-grid {
+        grid-template-columns: 1fr;
     }
     
     .contact-item {
         flex-direction: row;
         text-align: left;
-        gap: 1rem;
     }
     
     .contact-link {
         font-size: 1rem;
-    }
-    
-    .footer-logo {
-        font-size: 1.5rem;
-    }
-}
-
-/* Dispositivos muito pequenos (até 400px) */
-@media (max-width: 400px) {
-    .service-card {
-        padding: 1.5rem 1rem;
-    }
-    
-    .fixed-buttons {
-        bottom: 1rem;
-        right: 1rem;
-    }
-    
-    .fixed-button {
-        width: 2.8rem;
-        height: 2.8rem;
-    }
-    
-    .fixed-button img {
-        width: 1.4rem;
-        height: 1.4rem;
-    }
-
-    .container {
-        padding: 0 0.8rem;
     }
 }
