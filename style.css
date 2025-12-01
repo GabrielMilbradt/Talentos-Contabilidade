@@ -825,16 +825,16 @@ footer {
     }
     
     .about-content {
-        grid-template-columns: 1fr 1fr; /* Mantém em 2 colunas */
+        grid-template-columns: 1fr;
         text-align: left;
         gap: 2.5rem;
     }
     
     .about-image {
         display: block !important;
-        order: 0; /* Mantém a imagem à direita */
-        max-width: 100%;
-        margin: 0;
+        order: 0;
+        max-width: 80%; /* Imagem menor no tablet */
+        margin: 0 auto;
     }
     
     .contact-grid {
@@ -957,12 +957,11 @@ footer {
         line-height: 1.4;
     }
     
-    /* SOBRE - Layout de 2 colunas para telas médias e grandes */
+    /* SOBRE - Layout de 1 coluna para mobile */
     .about-content {
-        grid-template-columns: 1fr 1fr; /* Mantém 2 colunas */
+        grid-template-columns: 1fr;
         text-align: left;
         gap: 2rem;
-        align-items: center;
     }
     
     .about-text h2 {
@@ -985,12 +984,9 @@ footer {
         margin-bottom: 0.5rem;
     }
     
-    /* Imagem visível e à direita no mobile */
+    /* IMAGEM OCULTA NO CELULAR */
     .about-image {
-        display: block !important;
-        max-width: 100%;
-        margin: 0;
-        order: 0; /* Mantém a imagem à direita */
+        display: none !important;
     }
     
     /* Estatísticas em 2 colunas */
@@ -1103,15 +1099,11 @@ footer {
         padding: 1rem 0.8rem;
     }
     
-    /* SOBRE - Em celulares muito pequenos, vai para 1 coluna */
+    /* SOBRE - Em celulares muito pequenos */
     .about-content {
         grid-template-columns: 1fr;
         text-align: left;
         gap: 1.5rem;
-    }
-    
-    .about-image {
-        margin-top: 1rem;
     }
     
     /* Estatísticas em coluna única para telas muito pequenas */
@@ -1145,8 +1137,8 @@ footer {
     }
 }
 
-/* Layout de 2 colunas para o Sobre em telas acima de 577px */
-@media (min-width: 577px) {
+/* Layout de 2 colunas para o Sobre em telas maiores (mostra a imagem) */
+@media (min-width: 769px) {
     .about-content {
         grid-template-columns: 1.2fr 0.8fr !important;
         align-items: center;
@@ -1154,7 +1146,9 @@ footer {
     }
     
     .about-image {
+        display: block !important; /* Mostra a imagem em telas maiores */
         order: 0 !important;
         margin: 0 !important;
+        max-width: 100% !important;
     }
 }
