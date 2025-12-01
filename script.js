@@ -69,7 +69,6 @@ document.head.appendChild(style);
 window.addEventListener('scroll', function() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
     
     let current = '';
     
@@ -82,13 +81,6 @@ window.addEventListener('scroll', function() {
     });
     
     navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === current) {
-            link.classList.add('active');
-        }
-    });
-    
-    mobileNavLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').substring(1) === current) {
             link.classList.add('active');
@@ -159,57 +151,70 @@ if (statsSection) {
     statsObserver.observe(statsSection);
 }
 
-// 7. Menu Mobile (hamburguer) - MODIFICADO PARA LADO DIREITO
+// 7. Menu Mobile (hamburguer)
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenuExpanded = document.getElementById('mobileMenuExpanded');
-    const mobileMenuClose = document.getElementById('mobileMenuClose');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
     
-    // Criar overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'mobile-menu-overlay';
-    document.body.appendChild(overlay);
-    
-    function openMobileMenu() {
-        mobileMenuExpanded.classList.add('active');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Impede scroll do body
-    }
-    
-    function closeMobileMenu() {
-        mobileMenuExpanded.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = ''; // Restaura scroll do body
-    }
-    
-    if (mobileMenuBtn && mobileMenuExpanded && mobileMenuClose) {
-        // Abrir menu mobile
-        mobileMenuBtn.addEventListener('click', openMobileMenu);
-        
-        // Fechar menu com botão X
-        mobileMenuClose.addEventListener('click', closeMobileMenu);
+    if (mobileMenuBtn && mobileMenuExpanded) {
+        // Abrir/fechar menu mobile
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenuExpanded.classList.toggle('active');
+            
+            // Mudar ícone
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenuExpanded.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
         
         // Fechar menu ao clicar em um link
         mobileNavLinks.forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
+            link.addEventListener('click', function() {
+                mobileMenuExpanded.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
         });
         
-        // Fechar menu ao clicar no overlay
-        overlay.addEventListener('click', closeMobileMenu);
-        
-        // Fechar menu com tecla ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && mobileMenuExpanded.classList.contains('active')) {
-                closeMobileMenu();
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', function(event) {
+            if (!mobileMenuBtn.contains(event.target) && 
+                !mobileMenuExpanded.contains(event.target)) {
+                mobileMenuExpanded.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         });
     }
     
-    // Fechar menu ao redimensionar para desktop
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && mobileMenuExpanded.classList.contains('active')) {
-            closeMobileMenu();
-        }
+    // Atualizar links ativos no menu mobile também
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        mobileNavLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
     });
 });
