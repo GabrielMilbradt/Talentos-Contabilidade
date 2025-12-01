@@ -28,8 +28,8 @@ const observer = new IntersectionObserver(function(entries) {
 
 // Observar elementos para animação
 document.addEventListener('DOMContentLoaded', function() {
-    // Seleciona todos os elementos que devem ter a animação, INCLUINDO O NOVO .faq-item
-    const elementsToAnimate = document.querySelectorAll('.fade-up, .service-card, .testimonial-card, .contact-form, .contact-info, .about-content, .faq-item');
+    // Seleciona todos os elementos que devem ter a animação, removendo .testimonial-card e .testimonials-grid
+    const elementsToAnimate = document.querySelectorAll('.fade-up, .service-card, .contact-form, .contact-info, .about-content, .faq-item');
     
     elementsToAnimate.forEach(el => {
         // Garante que o elemento tenha a classe inicial de animação
@@ -62,9 +62,7 @@ style.textContent = `
     .services-grid .service-card:nth-child(5) { transition-delay: 0.5s; }
     .services-grid .service-card:nth-child(6) { transition-delay: 0.6s; }
     
-    .testimonials-grid .testimonial-card:nth-child(1) { transition-delay: 0.1s; }
-    .testimonials-grid .testimonial-card:nth-child(2) { transition-delay: 0.2s; }
-    .testimonials-grid .testimonial-card:nth-child(3) { transition-delay: 0.3s; }
+    /* DEPOIMENTOS REMOVIDOS */
     
     /* Delay para animação em cascata dos itens do FAQ (NOVO) */
     .faq-grid .faq-item:nth-child(1) { transition-delay: 0.1s; }
@@ -91,6 +89,7 @@ window.addEventListener('scroll', function() {
     
     navLinks.forEach(link => {
         link.classList.remove('active');
+        // Verifica se o href do link corresponde ao ID da seção atual
         if (link.getAttribute('href').substring(1) === current) {
             link.classList.add('active');
         }

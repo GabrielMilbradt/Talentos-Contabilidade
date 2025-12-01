@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@700&display=swap');
 
 * {
@@ -156,7 +155,8 @@ nav.scrolled .nav-logo img {
 
 /* Hero */
 .hero {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 26, 0.95)), 
+    /* Ajuste para melhor contraste com o layout mobile da imagem */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 26, 26, 0.95) 100%), 
                 url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center;
@@ -166,6 +166,7 @@ nav.scrolled .nav-logo img {
     align-items: center;
     text-align: center;
     position: relative;
+    /* Ajuste para o novo tamanho do cabeçalho */
     padding-top: 7rem; 
 }
 
@@ -330,32 +331,10 @@ nav.scrolled .nav-logo img {
     transform: scale(1.03);
 }
 
-/* Depoimentos */
-.testimonial-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    text-align: left;
-}
+/* DEPOIMENTOS: CLASSES MANTIDAS CASO QUEIRA REAPROVEITAR ESTILOS */
+/* REMOVIDO DA PÁGINA: testimonial-card, testimonials-grid, stars */
 
-.testimonial-card p {
-    color: var(--light);
-    font-size: 1.1rem;
-}
-
-.testimonial-card h4 {
-    color: var(--primary);
-    font-weight: 700;
-    margin-top: 1rem;
-}
-
-/* Estrelas nos depoimentos */
-.stars {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-}
-
-/*  ESTATÍSTICAS (CONTADOR)  */
+/* ESTATÍSTICAS (CONTADOR)  */
 
 #estatisticas {
     background: linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.95)), 
@@ -805,6 +784,7 @@ footer {
     }
 }
 
+/* ALTERAÇÕES PRINCIPAIS PARA MOBILE (VISUAL DA IMAGEM 2) */
 @media (max-width: 768px) {
     html {
         font-size: 15px; /* Fonte base um pouco menor */
@@ -815,25 +795,51 @@ footer {
     }
     
     .hero {
-        min-height: 80vh;
+        /* Aumenta o padding superior para compensar o cabeçalho menor */
         padding-top: 10rem; 
+        min-height: 85vh; /* Levemente mais alto para o efeito visual */
     }
 
-    /* Navegação - Menu em uma única linha com scroll horizontal (Melhor para mobile) */
+    /* Navegação Otimizada para Mobile (Logo centralizada + Menu de Rolagem) */
     .nav-container {
         flex-direction: column;
         align-items: center;
         padding: 0;
+        width: 100%;
     }
     
     nav {
         height: auto;
+        padding: 0;
+        /* Adiciona sombra apenas quando o menu estiver "scrolled" (para evitar conflito na primeira dobra) */
+        box-shadow: none; 
     }
 
-    .nav-logo {
-        padding: 0.5rem 0;
+    nav.scrolled {
+        /* Altura menor ao rolar, apenas com a logo */
+        height: 6rem;
+        padding-bottom: 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     }
     
+    /* Contém a Logo - Visível no topo */
+    .nav-logo {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+        order: 1; /* Garante que a logo fique no topo */
+    }
+    
+    .nav-logo img {
+        height: 4.5rem; /* Logo maior na primeira dobra */
+        transition: all 0.3s ease;
+    }
+
+    nav.scrolled .nav-logo img {
+        height: 3.5rem; /* Logo menor no scroll */
+    }
+    
+    /* Menu de Links - Scroll Horizontal na parte inferior */
     .nav-menu {
         width: 100%;
         overflow-x: auto; /* Permite scroll horizontal */
@@ -841,11 +847,13 @@ footer {
         justify-content: flex-start;
         padding: 0.5rem 20px;
         gap: 1.5rem;
+        border-top: 1px solid rgba(212, 175, 55, 0.1);
+        order: 2; /* Garante que o menu fique abaixo da logo */
     }
 
-    .nav-logo img {
-        height: 4rem; /* Logo menor */
-        margin-top: 0.5rem;
+    nav.scrolled .nav-menu {
+        /* Oculta o menu de links ao rolar (deixa apenas a logo) */
+        display: none; 
     }
     
     .nav-link {
@@ -854,7 +862,7 @@ footer {
         padding: 0.5rem 0;
     }
 
-    .service-card, .testimonial-card {
+    .service-card {
         padding: 2rem 1.2rem;
     }
     
@@ -892,6 +900,7 @@ footer {
     }
     
     .direct-contact-buttons {
+        justify-content: center;
         gap: 1rem;
         margin-top: 1.5rem;
     }
@@ -932,9 +941,13 @@ footer {
     }
     
     .nav-logo img {
-        height: 3.5rem;
+        height: 4rem;
     }
 
+    nav.scrolled .nav-logo img {
+        height: 3rem;
+    }
+    
     /* Cards e Grids */
     .services-grid {
         grid-template-columns: 1fr;
