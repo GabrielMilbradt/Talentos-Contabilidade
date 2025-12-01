@@ -19,12 +19,28 @@
             <a href="#inicio" class="nav-link active">Início</a>
             <a href="#servicos" class="nav-link">Serviços</a>
             <a href="#sobre" class="nav-link">Sobre</a>
-            <a href="#faq" class="nav-link">FAQ</a> <a href="#contato" class="nav-link">Contato</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#contato" class="nav-link">Contato</a>
         </div>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
+            <i class="fas fa-bars"></i>
+        </button>
         
         <div class="nav-spacer"></div>
     </div>
 </nav>
+
+<!-- Menu Mobile Expandido -->
+<div class="mobile-menu-expanded" id="mobileMenuExpanded">
+    <div class="mobile-menu-links">
+        <a href="#inicio" class="mobile-nav-link active">Início</a>
+        <a href="#servicos" class="mobile-nav-link">Serviços</a>
+        <a href="#sobre" class="mobile-nav-link">Sobre</a>
+        <a href="#faq" class="mobile-nav-link">FAQ</a>
+        <a href="#contato" class="mobile-nav-link">Contato</a>
+    </div>
+</div>
 
 <section id="inicio" class="hero">
     <div class="hero-content fade-up"> 
@@ -160,7 +176,8 @@
 
 <section id="faq">
     <div class="container">
-        <h2 class="section-title fade-up">Dúvidas Frequentes</h2>         <div class="faq-grid">
+        <h2 class="section-title fade-up">Dúvidas Frequentes</h2>
+        <div class="faq-grid">
             <details class="faq-item fade-up">
                 <summary>Quanto tempo leva para abrir uma empresa?</summary>
                 <p>O tempo pode variar dependendo do município e da complexidade do seu negócio, mas em média, o processo de abertura é concluído entre 5 a 15 dias úteis, após a coleta de toda a documentação necessária.</p>
@@ -183,6 +200,7 @@
         </div>
     </div>
 </section>
+
 <section id="contato">
     <div class="container">
         <div class="contact-header fade-up"> 
@@ -242,7 +260,8 @@
             </div>
 
             <form class="contact-form">
-                <h3>Solicite sua Proposta Personalizada</h3>                 <div class="form-group">
+                <h3>Solicite sua Proposta Personalizada</h3>
+                <div class="form-group">
                     <input type="text" id="nome" name="nome" placeholder="Seu Nome Completo*" required>
                 </div>
                 <div class="form-group">
@@ -251,7 +270,7 @@
                 <div class="form-group">
                     <input type="tel" id="telefone" name="telefone" placeholder="Telefone (WhatsApp)*" required>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <textarea id="mensagem" name="mensagem" placeholder="Sua Mensagem ou Serviço de Interesse"></textarea>
                 </div>
                 <button type="submit" class="cta-button">Enviar Pedido de Contato</button>

@@ -107,11 +107,12 @@ nav.scrolled {
 .nav-logo img {
     height: 5rem;
     transition: all 0.3s ease;
-    min-width: 100px; 
+    min-width: auto;
+    object-fit: contain;
 }
 
 nav.scrolled .nav-logo img {
-    height: 4rem;
+    height: 3.5rem;
 }
 
 .nav-menu {
@@ -130,7 +131,7 @@ nav.scrolled .nav-logo img {
     padding: 0.3rem 0;
     position: relative;
     text-decoration: none;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -158,20 +159,79 @@ nav.scrolled .nav-logo img {
     flex-shrink: 0;
 }
 
+/* Botão do menu mobile (hamburguer) */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+    color: var(--primary-light);
+}
+
+/* Menu mobile expandido */
+.mobile-menu-expanded {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: rgba(18, 18, 18, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu-expanded.active {
+    display: block;
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mobile-nav-link {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
 /* Hero */
 .hero {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 26, 26, 0.95) 100%), 
                 url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center;
-    background-attachment: scroll; 
+    background-attachment: scroll;
     min-height: 100vh;
     display: flex;
     align-items: center;
     text-align: center;
     position: relative;
-    /* Ajuste inicial para o cabeçalho desktop */
-    padding-top: 7rem; 
+    padding-top: 7rem;
 }
 
 @media (min-width: 993px) {
@@ -304,7 +364,7 @@ nav.scrolled .nav-logo img {
 .about-features li {
     margin-bottom: 0.8rem;
     color: var(--light-gray);
-    list-style: none; /* Remove bullet padrão */
+    list-style: none;
     text-align: left;
 }
 
@@ -335,14 +395,13 @@ nav.scrolled .nav-logo img {
     transform: scale(1.03);
 }
 
-/* ESTATÍSTICAS (CONTADOR)  */
-
+/* ESTATÍSTICAS (CONTADOR) */
 #estatisticas {
     background: linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.95)), 
                 url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Efeito Parallax */
+    background-attachment: fixed;
     padding: 5rem 0;
     border-top: 1px solid rgba(212, 175, 55, 0.1);
     border-bottom: 1px solid rgba(212, 175, 55, 0.1);
@@ -414,7 +473,7 @@ summary {
     font-weight: 600;
     color: var(--light);
     font-size: 1.1rem;
-    list-style: none; /* Remove seta padrão */
+    list-style: none;
     position: relative;
     padding-right: 2rem;
 }
@@ -443,10 +502,8 @@ details p {
     padding-top: 1rem;
     font-size: 1rem;
 }
-/* ================= FIM FAQ ================= */
 
 /* ================= SEÇÃO CONTATO ================= */
-
 #contato {
     background: var(--dark);
 }
@@ -546,7 +603,7 @@ details p {
 }
 
 .contact-item {
-    display: flex; 
+    display: flex;
     align-items: center;
     gap: 1.25rem;
     padding: 1.25rem;
@@ -618,7 +675,7 @@ details p {
     gap: 0.5rem;
     font-size: 1rem;
     width: 100%;
-    max-width: 200px; 
+    max-width: 200px;
 }
 
 .direct-contact-button:hover {
@@ -634,8 +691,8 @@ details p {
     flex-direction: column;
     gap: 1rem;
     position: fixed;
-    bottom: 1.5rem; 
-    right: 1.5rem; 
+    bottom: 1.5rem;
+    right: 1.5rem;
     z-index: 999;
 }
 
@@ -665,7 +722,7 @@ details p {
 
 /* Footer */
 footer {
-    background-color: var(--secondary); 
+    background-color: var(--secondary);
     padding: 3rem 0;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -696,7 +753,6 @@ footer {
     font-size: 0.9rem;
 }
 
-
 /* Animações */
 .fade-up {
     opacity: 0;
@@ -710,7 +766,7 @@ footer {
 }
 
 /* ======================================================= */
-/* MEDIA QUERIES PARA RESPONSIVIDADE OTIMIZADA (MOBILE FIRST) */
+/* MEDIA QUERIES PARA RESPONSIVIDADE OTIMIZADA */
 /* ======================================================= */
 
 @media (max-width: 1200px) {
@@ -724,42 +780,37 @@ footer {
 
 @media (max-width: 992px) {
     section {
-        padding: 5rem 0; 
+        padding: 5rem 0;
     }
 
     .section-title {
         margin-bottom: 3rem;
     }
 
-    /* Menu de Navegação - Otimização */
-    /* Em telas maiores que 768px, mantém o menu visível */
-    .nav-container {
-        padding: 0 1.25rem;
+    /* Ajuste da logo no tablet */
+    .nav-logo img {
+        height: 4.5rem;
     }
     
-    nav {
-        height: auto; 
-        padding: 0;
-        box-shadow: none; 
-    }
-
-    .nav-logo {
-        padding: 0.5rem 1.25rem;
+    nav.scrolled .nav-logo img {
+        height: 3.2rem;
     }
     
+    /* Menu de navegação - visível no tablet */
     .nav-menu {
-        width: 100%;
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 1rem;
-        flex-wrap: wrap; 
-        justify-content: space-around;
-        padding: 0.5rem 1.25rem; 
+        padding: 0.8rem 1.25rem;
         border-top: 1px solid rgba(212, 175, 55, 0.1);
-        display: flex; /* Garante que esteja visível no tablet */
     }
+    
     .nav-link {
-        font-size: 0.95rem; 
-        padding: 0.2rem 0.5rem;
+        font-size: 0.9rem;
+        padding: 0.3rem 0.6rem;
     }
+    
     .nav-spacer {
         display: none;
     }
@@ -790,62 +841,63 @@ footer {
 /* ALTERAÇÕES PRINCIPAIS PARA MOBILE (Telas <= 768px) */
 @media (max-width: 768px) {
     html {
-        font-size: 15px; 
+        font-size: 15px;
     }
 
-    /* Ajuste na seção Hero */
-    .hero {
-        /* Distância para começar o conteúdo abaixo da logo (aprox. 120px) */
-        padding-top: 8.5rem; 
-        min-height: 90vh; 
-        display: flex; /* Garante que o conteúdo fique centralizado verticalmente */
-        align-items: center;
-    }
-
-    /* Navegação Otimizada para Mobile (Logo centralizada + Menu Oculto/Reduzido) */
-    nav {
-        height: auto;
-        padding: 0;
-        box-shadow: none; 
-    }
-
-    .nav-container {
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-        width: 100%;
-    }
-    
-    /* Contém a Logo - Visível e centralizada no topo */
+    /* Ajuste da logo no mobile - TAMANHO MENOR */
     .nav-logo {
-        width: 100%;
-        text-align: center;
-        padding: 1.5rem 0 0.5rem 0; /* Aumenta padding top para centralizar visualmente */
-        order: 1;
+        padding: 1rem 0 0.5rem 0;
     }
     
     .nav-logo img {
-        height: 6rem; /* Logo maior, como na imagem de referência */
-        transition: all 0.3s ease;
-    }
-
-    nav.scrolled {
-        /* Mantém uma altura menor no scroll */
-        height: 5rem;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        padding: 0.5rem 0;
+        height: 3.8rem;
+        max-width: 180px;
     }
     
     nav.scrolled .nav-logo img {
-        height: 4rem; /* Logo menor ao rolar */
-    }
-
-    /* Oculta ou simplifica o menu de links no topo para telas pequenas */
-    .nav-menu {
-        display: none; /* Oculta o menu de navegação tradicional */
+        height: 3rem;
     }
     
-    /* Layouts Gerais */
+    /* Mostrar botão do menu apenas no mobile */
+    .mobile-menu-btn {
+        display: block;
+        order: 2;
+    }
+    
+    .nav-container {
+        justify-content: space-between;
+        padding: 0 1rem;
+    }
+    
+    .nav-logo {
+        order: 1;
+        margin-right: auto;
+    }
+    
+    /* Ajustar altura da navbar no mobile */
+    nav {
+        height: 80px;
+    }
+    
+    nav.scrolled {
+        height: 65px;
+    }
+    
+    nav.scrolled ~ .mobile-menu-expanded {
+        top: 65px;
+    }
+    
+    /* Esconder o menu de navegação no mobile */
+    .nav-menu {
+        display: none !important;
+    }
+    
+    /* Ajuste do Hero para compensar a navbar menor */
+    .hero {
+        padding-top: 6.5rem;
+        min-height: 85vh;
+    }
+    
     .about-image {
         display: none;
     }
@@ -869,23 +921,31 @@ footer {
         font-size: 14px;
     }
     
-    /* Aumenta a logo para telas muito pequenas, focando no visual da imagem */
+    /* Ainda menor para telas pequenas */
     .nav-logo img {
-        height: 5.5rem; 
+        height: 3.2rem;
+        max-width: 150px;
     }
-
-    /* Ajuste da distância do Hero (ainda menor) */
+    
+    nav.scrolled .nav-logo img {
+        height: 2.8rem;
+    }
+    
+    /* Reduzir ainda mais o padding do Hero */
     .hero {
-        padding-top: 10rem;
+        padding-top: 5.5rem;
         min-height: 80vh;
     }
-
+    
+    /* Ajuste do H1 para caber melhor */
     .hero h1 {
-        font-size: 2.5rem; /* Ajuste o H1 para caber melhor */
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
     }
     
     .hero p {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        margin-bottom: 2rem;
     }
     
     .cta-button {
